@@ -1,4 +1,4 @@
-import { Item, GildedRose } from '@/gilded-rose';
+import { Item, GildedRose } from "@/gilded-rose";
 
 // Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a prominent city ran by a friendly innkeeper named Allison. We also buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in Quality as they approach their sell by date.
 
@@ -24,7 +24,20 @@ import { Item, GildedRose } from '@/gilded-rose';
 
 // Just for clarification, an item can never have its Quality increase above 50, however "Sulfuras" is a legendary item and as such its Quality is 80 and it never alters.
 
+describe("Gilded Rose > display correct properties", () => {
+  it("should have the correct name", () => {
+    const gildedRose = new GildedRose([new Item("kendama", 0, 0)]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe('fixme');
+    expect(items[0].name).toBe("kendama");
+  });
+  it("should have the correct sellIn after update", () => {
+    const gildedRose = new GildedRose([new Item("foo", 5, 0)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].sellIn).toBe(4);
+  });
+  it("should have the correct quality after update", () => {
+    const gildedRose = new GildedRose([new Item("foo", 1, 9)]);
+    const items = gildedRose.updateQuality();
+    expect(items[0].quality).toBe(8);
   });
 });
